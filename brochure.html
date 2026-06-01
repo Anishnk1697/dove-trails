@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Dove Trails — Where San Antonio Comes Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --iv:#F5F0E8;--iv2:#EDE6D6;--iv3:#E2DDD5;
+  --ch:#1C1A17;--ch2:#2D2A25;--ch3:#3D3A35;
+  --sg:#7A9478;--sg-lt:#A8BFA6;--sg-dk:#4A6448;
+  --go:#BF9A5A;--go-lt:#D4B47A;--go-dk:#9A7A3A;
+  --mt:#7A7468;--wh:#FEFCF8;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost',system-ui,sans-serif;
+  --e2:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:var(--sans);font-weight:300;background:var(--iv);color:var(--ch);overflow-x:hidden;cursor:none}
+a{text-decoration:none;color:inherit}
+img{display:block;object-fit:cover}
+
+#cur{position:fixed;width:8px;height:8px;background:var(--go);border-radius:50%;pointer-events:none;z-index:9999;top:0;left:0;transform:translate(-50%,-50%);transition:transform .14s}
+#cur2{position:fixed;width:34px;height:34px;border:1px solid rgba(191,154,90,.4);border-radius:50%;pointer-events:none;z-index:9998;top:0;left:0;transform:translate(-50%,-50%);transition:transform .45s var(--e2);opacity:.7}
+body.hov #cur{transform:translate(-50%,-50%) scale(2.8);opacity:.25}
+body.hov #cur2{transform:translate(-50%,-50%) scale(.45);opacity:1}
+
+.print-btn{position:fixed;bottom:24px;right:24px;z-index:100;background:var(--ch);color:var(--go-lt);font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:12px 20px;border:1px solid rgba(191,154,90,.3);display:flex;align-items:center;gap:7px;cursor:none;transition:all .25s;box-shadow:0 4px 24px rgba(0,0,0,.3)}
+.print-btn:hover{background:var(--go);color:var(--ch)}
+@media print{.print-btn,.no-print{display:none!important}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+/* COVER */
+.cover{position:relative;height:100svh;min-height:680px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;background:var(--ch)}
+.cover-bg{position:absolute;inset:0}.cover-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.cover-g{position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,26,23,.1) 0%,rgba(28,26,23,.08) 35%,rgba(28,26,23,.78) 65%,rgba(28,26,23,.97) 100%)}
+.cover-g2{position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,26,23,.52) 0%,transparent 55%)}
+.ctop{position:absolute;top:0;left:0;right:0;z-index:3;padding:32px 56px;display:flex;align-items:center;justify-content:space-between}
+.ctop-logo img{height:44px;width:auto;filter:brightness(20)}
+.ctop-tag{font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:rgba(254,252,248,.4)}
+.cc{position:relative;z-index:2;padding:0 56px 68px}
+.ey{font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--go-lt);display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.ey::before{content:'';display:block;width:26px;height:1px;background:var(--go)}
+.ch1{font-family:var(--serif);font-size:clamp(56px,8vw,112px);font-weight:300;line-height:.88;color:var(--wh);letter-spacing:-.02em;margin-bottom:28px}
+.ch1 em{font-style:italic;color:var(--go-lt)}
+.crule{width:48px;height:1px;background:var(--go);margin-bottom:28px}
+.csub{font-size:15px;font-weight:300;color:rgba(254,252,248,.58);line-height:1.8;max-width:420px;margin-bottom:40px}
+.caddr{font-family:var(--sans);font-size:11px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:rgba(254,252,248,.35)}
+.cscroll{position:absolute;bottom:64px;right:56px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px}
+.cscroll span{font-family:var(--sans);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(254,252,248,.3);writing-mode:vertical-lr}
+.csl{width:1px;height:42px;background:linear-gradient(to bottom,rgba(191,154,90,.6),transparent);animation:csa 2.2s ease-in-out infinite}
+@keyframes csa{0%,100%{opacity:.4}50%{opacity:1}}
+
+/* LAYOUT HELPERS */
+.sec{padding:88px 56px}
+.lbl{font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--go);display:flex;align-items:center;gap:11px}
+.lbl::before{content:'';display:block;width:20px;height:1px;background:var(--go)}
+.lbl.lt{color:var(--go-lt)}.lbl.lt::before{background:var(--go-lt)}
+.h2{font-family:var(--serif);font-size:clamp(32px,3.8vw,54px);font-weight:300;line-height:1.04;color:var(--ch);letter-spacing:-.01em}
+.h2 em{font-style:italic;color:var(--go-dk)}
+.h2.lt{color:var(--wh)}.h2.lt em{color:var(--go-lt)}
+.p{font-size:15px;line-height:1.84;color:var(--mt)}
+.p strong{font-weight:500;color:var(--ch)}
+.p.lt{color:rgba(254,252,248,.44)}
+.rule{width:38px;height:1px;background:var(--go);margin:26px 0}
+.rule.lt{background:var(--go-lt)}
+
+/* SPLIT */
+.split{display:grid;grid-template-columns:1fr 1fr}
+.split.rev{direction:rtl}.split.rev>*{direction:ltr}
+.sp{overflow:hidden}.sp img{width:100%;height:100%;transition:transform .9s var(--e2)}
+.split:hover .sp img{transform:scale(1.04)}
+.sb{display:flex;flex-direction:column;justify-content:center;padding:80px 64px}
+.sb.wh{background:var(--wh)}.sb.iv2{background:var(--iv2)}.sb.dk{background:var(--ch2)}
+
+/* STATS */
+.stats{display:flex;gap:36px;flex-wrap:wrap;margin-top:26px}
+.sv{font-family:var(--serif);font-size:32px;font-weight:300;color:var(--sg-dk);line-height:1}
+.sl{font-family:var(--sans);font-size:9px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--mt);margin-top:4px}
+.sv.lt{color:var(--go-lt)}.sl.lt{color:rgba(254,252,248,.34)}
+
+/* IMAGE BOXES — symmetric grid rows */
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px}
+.row4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:3px}
+.box{overflow:hidden;position:relative;cursor:none}
+.box img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--e2);display:block}
+.box:hover img{transform:scale(1.06)}
+.box-cap{position:absolute;bottom:0;left:0;right:0;padding:13px 16px;background:linear-gradient(0deg,rgba(28,26,23,.82),transparent);font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--go-lt)}
+
+/* PULLQUOTE */
+.pq{background:var(--iv2);padding:68px 56px;display:grid;grid-template-columns:80px 1fr;gap:0;align-items:start}
+.pqm{font-family:var(--serif);font-size:120px;font-weight:300;color:var(--go-lt);opacity:.2;line-height:.7}
+.pqt{font-family:var(--serif);font-size:clamp(18px,2.6vw,34px);font-weight:300;font-style:italic;color:var(--ch);line-height:1.42;margin-bottom:20px}
+.pqa{font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--go-dk)}
+
+/* AMENITY CARDS */
+.amgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:48px}
+.amc{background:var(--wh);padding:28px 24px 32px;border-top:2px solid var(--go);transition:background .25s,transform .25s;cursor:none}
+.amc:hover{background:var(--iv2);transform:translateY(-3px)}
+.ami svg{width:34px;height:34px;stroke:var(--sg);fill:none;stroke-width:1.4;margin-bottom:16px}
+.amh{font-family:var(--serif);font-size:17px;font-weight:400;color:var(--ch);margin-bottom:8px;line-height:1.2}
+.amp{font-size:12px;line-height:1.72;color:var(--mt)}
+
+/* FLOOR PLANS */
+.fpgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:48px}
+.fpc{background:var(--ch2);border:1px solid rgba(255,255,255,.06);overflow:hidden;cursor:none;transition:border-color .28s;position:relative}
+.fpc:hover{border-color:rgba(191,154,90,.3)}
+.fpc.feat{background:rgba(191,154,90,.07);border-color:rgba(191,154,90,.2)}
+.fp-img{background:var(--wh)}
+.fp-img img{width:100%;object-fit:contain;background:var(--wh);display:block;max-height:340px}
+.fp-badge{position:absolute;top:12px;right:12px;background:var(--go);font-family:var(--sans);font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:4px 9px;color:var(--ch)}
+.fpb{padding:22px 22px 28px}
+.fpn{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--wh);margin-bottom:4px}
+.fpt{font-family:var(--sans);font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--go);margin-bottom:16px}
+.fpsps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.fpsv{font-family:var(--serif);font-size:16px;font-weight:300;color:var(--wh);line-height:1}
+.fpsl{font-family:var(--sans);font-size:8px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:rgba(254,252,248,.28);margin-top:3px}
+.fpp{font-family:var(--serif);font-size:20px;font-weight:300;color:var(--go-lt)}
+.fpf{font-family:var(--sans);font-size:10px;font-weight:300;color:rgba(254,252,248,.28);padding-top:12px;border-top:1px solid rgba(255,255,255,.06);margin-top:12px;line-height:1.6}
+
+/* SITE PLAN */
+.sp-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:48px;align-items:start}
+.sp-legend{background:var(--wh);padding:40px 36px}
+.sl-title{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--ch);margin-bottom:20px}
+.sl-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--iv3);font-size:12px;font-weight:300;color:var(--ch3)}
+.sl-n{font-family:var(--serif);font-size:15px;font-weight:400;color:var(--go-dk);min-width:26px}
+
+/* NEIGHBOURHOOD */
+.nbgrid{display:grid;gap:3px;margin-top:48px}
+.nbgrid.r4{grid-template-columns:repeat(4,1fr)}
+.nbgrid.r3{grid-template-columns:repeat(3,1fr)}
+.nbc{position:relative;overflow:hidden;cursor:none;height:240px}
+.nbc img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--e2)}
+.nbc:hover img{transform:scale(1.07)}
+.nbo{position:absolute;inset:0;background:linear-gradient(0deg,rgba(28,26,23,.84) 0%,rgba(28,26,23,.18) 55%,transparent 100%)}
+.nbc-c{position:absolute;bottom:0;left:0;right:0;padding:16px 18px}
+.nbd{font-family:var(--serif);font-size:19px;font-weight:300;color:var(--go-lt);line-height:1;margin-bottom:3px}
+.nbn{font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(254,252,248,.8)}
+.nbx{font-family:var(--sans);font-size:9px;font-weight:300;color:rgba(254,252,248,.42);margin-top:2px}
+
+/* LOCATION TABLE */
+.loctab{display:flex;flex-direction:column;gap:1px;margin-top:28px}
+.ltr{background:rgba(255,255,255,.05);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-left:2px solid rgba(255,255,255,.08);transition:all .22s;cursor:none}
+.ltr:hover{background:rgba(255,255,255,.09);border-left-color:var(--go)}
+.ltl{font-family:var(--sans);font-size:12px;font-weight:300;color:rgba(254,252,248,.48)}
+.ltv{font-family:var(--serif);font-size:17px;font-weight:300;color:var(--go-lt)}
+
+/* INVESTMENT */
+.inv-panel{background:rgba(255,255,255,.04);border:1px solid rgba(191,154,90,.13);padding:44px 40px}
+.inv-stats{display:flex;flex-direction:column;gap:2px;margin-bottom:32px}
+.ist{background:rgba(255,255,255,.04);padding:16px 16px;border-left:2px solid rgba(191,154,90,.2)}
+.ist-val{font-family:var(--serif);font-size:28px;font-weight:300;color:var(--wh);line-height:1}
+.ist-lbl{font-family:var(--sans);font-size:9px;font-weight:300;letter-spacing:.12em;text-transform:uppercase;color:rgba(254,252,248,.28);margin-top:4px}
+
+/* BAND */
+.band{background:var(--sg-dk);padding:44px 56px;display:flex;align-items:center;justify-content:space-between}
+.band-t{font-family:var(--serif);font-size:clamp(20px,2.8vw,36px);font-weight:300;font-style:italic;color:var(--wh)}
+.band-s{font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.48)}
+
+/* CLOSING */
+.closing{position:relative;min-height:78svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:var(--ch)}
+.closing-bg{position:absolute;inset:0}.closing-bg img{width:100%;height:100%;object-fit:cover}
+.closing-g{position:absolute;inset:0;background:rgba(28,26,23,.8)}
+.clc{position:relative;z-index:2;padding:64px 56px;max-width:760px;margin:0 auto}
+.cl-ey{font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--go);display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:26px}
+.cl-ey::before,.cl-ey::after{content:'';display:block;width:22px;height:1px;background:var(--go)}
+.cl-h{font-family:var(--serif);font-size:clamp(40px,6vw,84px);font-weight:300;color:var(--wh);line-height:.9;letter-spacing:-.02em;margin-bottom:28px}
+.cl-h em{font-style:italic;color:var(--go-lt)}
+.cl-p{font-size:15px;font-weight:300;color:rgba(254,252,248,.55);line-height:1.76;max-width:480px;margin:0 auto 44px}
+.cl-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.cb{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:14px 36px;cursor:none;transition:all .25s}
+.cb-g{background:var(--go);color:var(--ch)}.cb-g:hover{background:var(--go-lt)}
+.cb-o{border:1px solid rgba(254,252,248,.25);color:rgba(254,252,248,.78)}.cb-o:hover{border-color:var(--go);color:var(--go-lt)}
+.cl-addr{font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:rgba(254,252,248,.26);margin-top:40px}
+
+/* FOOTER */
+.bfoot{background:var(--ch);padding:40px 56px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:28px;border-top:1px solid rgba(191,154,90,.16)}
+.bfoot-logo img{height:30px;width:auto;filter:brightness(20);opacity:.55}
+.bfoot-addr{font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:rgba(254,252,248,.26);text-align:center}
+.bfoot-r{font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:rgba(254,252,248,.2);text-align:right}
+
+/* REVEALS */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .8s var(--e2),transform .8s var(--e2)}
+.rv.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+@media(max-width:900px){
+  .sec,.sb{padding:56px 28px}
+  .split{grid-template-columns:1fr}
+  .fpgrid,.amgrid{grid-template-columns:1fr 1fr}
+  .nbgrid.r4,.nbgrid.r3{grid-template-columns:1fr 1fr}
+  .row4{grid-template-columns:1fr 1fr}
+  .sp-grid,.band,.bfoot{grid-template-columns:1fr}
+  .band,.bfoot{flex-direction:column;text-align:center}
+  .bfoot-r{text-align:center}
+  .pq{padding:52px 28px;grid-template-columns:56px 1fr}
+  .ctop,.cc,.cscroll{padding-left:28px;padding-right:28px}
+  .cl-ey,.clc{padding-left:28px;padding-right:28px}
+  .loctab,.inv-panel{margin-top:24px}
+}
+@media print{
+  @page{margin:0;size:A4 landscape}
+  .cover{height:100vh;break-after:page}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="cur2"></div>
+<button class="print-btn no-print" onclick="window.print()">
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Print / Save PDF
+</button>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-bg"><img src="https://cdn.prod.website-files.com/673390480b47a07dd6beac13/684d77a749ec1fad0fbef338_Image(2)_upscale01-min.jpg" alt="Dove Trails" onerror="this.src="assets/brochure_img_1.jpeg""></div>
+  <div class="cover-g"></div><div class="cover-g2"></div>
+  <div class="ctop">
+    <div class="ctop-logo"><img src="assets/brochure_ext_img_1.png" alt="Dove Trails" onerror="this.style.display='none'"></div>
+    <span class="ctop-tag">Residential Brochure &nbsp;·&nbsp; 2025–2026</span>
+  </div>
+  <div class="cc">
+    <div class="ey">San Antonio Medical District &nbsp;·&nbsp; Texas</div>
+    <h1 class="ch1">Where San Antonio<br><em>comes home.</em></h1>
+    <div class="crule"></div>
+    <p class="csub">152 wellness-designed homes in the heart of San Antonio's Medical District — priced for the people who keep this city running.</p>
+    <div class="caddr">5135 Wurzbach Road &nbsp;·&nbsp; From $179,000 &nbsp;·&nbsp; dovetrails.com</div>
+  </div>
+  <div class="cscroll no-print"><span>Scroll</span><div class="csl"></div></div>
+</section>
+
+<!-- COMMUNITY INTRO -->
+<section class="split">
+  <div class="sp"><img src="assets/brochure_img_2.jpeg" alt="Pool view" style="height:100%;min-height:500px"></div>
+  <div class="sb wh rv">
+    <div class="lbl">A Community Worth Building</div>
+    <h2 class="h2" style="margin-top:14px;margin-bottom:22px">A place people choose<br>to come home to.<br><em>Daily.</em></h2>
+    <p class="p">152 homes. One neighbourhood. Built in San Antonio's Medical District — at the intersection of the city's largest workforce and its most underserved housing gap. <strong>Designed for connection, wellness, and daily life that doesn't require a retreat to feel real.</strong></p>
+    <div class="rule"></div>
+    <div class="stats">
+      <div><div class="sv">152</div><div class="sl">Homes · Phase 1</div></div>
+      <div><div class="sv">8</div><div class="sl">Amenities</div></div>
+      <div><div class="sv">2.5mi</div><div class="sl">Medical Center</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LIFESTYLE SECTION -->
+<section class="sec" style="background:var(--ch);padding-bottom:3px">
+  <div class="rv">
+    <div class="lbl lt">The Life You Deserve</div>
+    <h2 class="h2 lt" style="margin-top:14px;margin-bottom:18px">A morning that feels<br>like <em>yours.</em></h2>
+    <p class="p lt" style="max-width:520px">Resort-calibre amenities at a price that makes them genuinely yours — not a weekend luxury. Your Tuesday morning. Your daily life.</p>
+  </div>
+</section>
+<!-- Row 1: 3 equal property photos -->
+<div class="row3" style="gap:3px;background:var(--ch)">
+  <div class="box" style="height:340px"><img src="assets/brochure_img_3.jpeg" alt="Pool"><div class="box-cap">Resort Pool &amp; Spa</div></div>
+  <div class="box" style="height:340px"><img src="assets/brochure_ext_img_2.jpg" alt="Sky Lounge"><div class="box-cap">Sky Lounge</div></div>
+  <div class="box" style="height:340px"><img src="assets/brochure_ext_img_3.jpg" alt="Dog Park"><div class="box-cap">Dog Park</div></div>
+</div>
+<!-- Row 2: 3 lifestyle images — joy, peace, connection -->
+<div class="row3" style="gap:3px;background:var(--ch);margin-top:3px">
+  <div class="box" style="height:280px"><img src="assets/brochure_ext_img_4.jpg" alt="Peace at home"><div class="box-cap">Your home. Your peace.</div></div>
+  <div class="box" style="height:280px"><img src="assets/brochure_ext_img_5.jpg" alt="Wellness"><div class="box-cap">Morning Wellness</div></div>
+  <div class="box" style="height:280px"><img src="assets/brochure_ext_img_6.jpg" alt="Community"><div class="box-cap">Community Connection</div></div>
+</div>
+
+<!-- PULLQUOTE -->
+<div class="pq rv">
+  <div class="pqm">&ldquo;</div>
+  <div>
+    <p class="pqt">The people who keep San Antonio running deserve a home that feels good. Not next decade. Now.</p>
+    <div class="pqa">Dove Trails &nbsp;·&nbsp; San Antonio Medical District</div>
+  </div>
+</div>
+
+<!-- PROPERTY RENDERS -->
+<section class="sec" style="background:var(--iv2);padding-bottom:3px">
+  <div class="rv">
+    <div class="lbl">The Property</div>
+    <h2 class="h2" style="margin-top:14px">Designed for the way<br>you <em>actually live.</em></h2>
+  </div>
+</section>
+<!-- Row 1: 2 equal -->
+<div class="row2" style="gap:3px;background:var(--iv2)">
+  <div class="box" style="height:420px"><img src="assets/brochure_img_4.jpeg" alt="Pool with apartments"><div class="box-cap">Pool &amp; Community Courtyard</div></div>
+  <div class="box" style="height:420px"><img src="assets/brochure_img_5.jpeg" alt="Pool view"><div class="box-cap">Resort Pool — From $179K</div></div>
+</div>
+<!-- Row 2: 3 equal -->
+<div class="row3" style="gap:3px;background:var(--iv2);margin-top:3px">
+  <div class="box" style="height:280px"><img src="assets/brochure_ext_img_7.jpg" alt="Entry"><div class="box-cap">Landscaped Arrival</div></div>
+  <div class="box" style="height:280px"><img src="assets/brochure_ext_img_8.jpg" alt="Amenities"><div class="box-cap">Outdoor Kitchens</div></div>
+  <div class="box" style="height:280px"><img src="assets/brochure_ext_img_3.jpg" alt="Dog park"><div class="box-cap">Dog Park</div></div>
+</div>
+
+<!-- AMENITIES -->
+<section class="sec" style="background:var(--iv)">
+  <div class="rv">
+    <div class="lbl">Every Amenity. Every Morning.</div>
+    <h2 class="h2" style="margin-top:14px">Eight amenities.<br><em>All yours. Daily.</em></h2>
+  </div>
+  <div class="amgrid rv d1">
+    <div class="amc">
+      <div style="height:140px;overflow:hidden;margin:-28px -24px 18px"><img src="assets/brochure_img_6.jpeg" alt="Pool" style="width:100%;height:100%;object-fit:cover"></div>
+      <div class="amh">Lagoon Pool &amp; Spa</div>
+      <p class="amp">Resort-style pool, heated spa, private cabanas. Designed for a Tuesday, not just a Saturday.</p>
+    </div>
+    <div class="amc">
+      <div style="height:140px;overflow:hidden;margin:-28px -24px 18px"><img src="assets/brochure_ext_img_2.jpg" alt="Sky Lounge" style="width:100%;height:100%;object-fit:cover"></div>
+      <div class="amh">Sky Lounge</div>
+      <p class="amp">Elevated gathering with Medical District views. Co-working, events, evening connection.</p>
+    </div>
+    <div class="amc">
+      <div style="height:140px;overflow:hidden;margin:-28px -24px 18px"><img src="assets/brochure_ext_img_3.jpg" alt="Dog Park" style="width:100%;height:100%;object-fit:cover"></div>
+      <div class="amh">Dog Park</div>
+      <p class="amp">Dedicated landscaped off-leash park. A community that takes people seriously takes their dogs seriously too.</p>
+    </div>
+    <div class="amc">
+      <div style="height:140px;overflow:hidden;margin:-28px -24px 18px"><img src="assets/brochure_ext_img_8.jpg" alt="Outdoor kitchens" style="width:100%;height:100%;object-fit:cover"></div>
+      <div class="amh">Outdoor Kitchens</div>
+      <p class="amp">Covered outdoor kitchens, communal dining, raised garden beds. The outdoor life Texas deserves.</p>
+    </div>
+    <div class="amc">
+      <div style="height:140px;overflow:hidden;margin:-28px -24px 18px"><img src="assets/brochure_ext_img_9.jpg" alt="Community spaces" style="width:100%;height:100%;object-fit:cover"></div>
+      <div class="amh">Community Spaces</div>
+      <p class="amp">Shared gathering areas designed for genuine connection — between neighbours, between spaces, between lives.</p>
+    </div>
+    <div class="amc">
+      <div style="height:140px;overflow:hidden;margin:-28px -24px 18px"><img src="assets/brochure_ext_img_7.jpg" alt="Gated entry" style="width:100%;height:100%;object-fit:cover"></div>
+      <div class="amh">Gated &amp; Secure</div>
+      <p class="amp">24/7 controlled access, monitored perimeter, and a beautifully landscaped arrival experience. Peace of mind, built in.</p>
+    </div>
+    <div class="amc">
+      <div style="height:140px;overflow:hidden;margin:-28px -24px 18px"><img src="assets/brochure_ext_img_10.jpg" alt="Sports courts" style="width:100%;height:100%;object-fit:cover"></div>
+      <div class="amh">Sports Courts</div>
+      <p class="amp">Pickleball, basketball, and multi-use courts — built for the community that uses them every day, not just on weekends.</p>
+    </div>
+    <div class="amc">
+      <div style="height:140px;overflow:hidden;margin:-28px -24px 18px"><img src="assets/brochure_ext_img_11.jpg" alt="Smart home technology" style="width:100%;height:100%;object-fit:cover"></div>
+      <div class="amh">Smart Home Ready</div>
+      <p class="amp">Every residence pre-wired for high-speed WiFi, smart thermostat control, keyless entry, and automated security from move-in day.</p>
+    </div>
+  </div>
+</section>
+
+<div class="band rv"><div class="band-t">"Eight minutes from everything. Miles from ordinary."</div><div class="band-s">5135 Wurzbach Road &nbsp;·&nbsp; San Antonio Medical District</div></div>
+
+<!-- FLOOR PLANS -->
+<section class="sec" style="background:var(--ch2)">
+  <div class="rv">
+    <div class="lbl lt">Find Your Perfect Home</div>
+    <h2 class="h2 lt" style="margin-top:14px;margin-bottom:18px">Three plans.<br><em>One community.</em></h2>
+    <p class="p lt" style="max-width:540px">Each floor plan designed around the way San Antonio's workforce actually lives — balconies, in-unit laundry, smart technology, and finishes that feel genuinely premium.</p>
+  </div>
+  <div class="fpgrid rv d1">
+    <div class="fpc">
+      <div class="fp-img"><img src="assets/brochure_img_7.jpeg" alt="Plan A2.1"></div>
+      <div class="fpb">
+        <div class="fpn">The Dove</div>
+        <div class="fpt">Plan A2.1 · One Bedroom</div>
+        <div class="fpsps">
+          <div><div class="fpsv">725</div><div class="fpsl">Sq Ft</div></div>
+          <div><div class="fpsv">1</div><div class="fpsl">Bed</div></div>
+          <div><div class="fpsv">1</div><div class="fpsl">Bath</div></div>
+          <div><div class="fpsv">38</div><div class="fpsl">Units</div></div>
+        </div>
+        <div class="fpp">From $179,000</div>
+        <div class="fpf">Balcony · In-unit Laundry · Smart Home · Pantry · Walk-in Closet</div>
+      </div>
+    </div>
+    <div class="fpc feat">
+      <div class="fp-badge">Most Popular</div>
+      <div class="fp-img"><img src="assets/brochure_img_8.jpeg" alt="Plan B2.1"></div>
+      <div class="fpb">
+        <div class="fpn">The Meadowlark</div>
+        <div class="fpt">Plan B2.1 · Two Bedroom · 2.5 Bath</div>
+        <div class="fpsps">
+          <div><div class="fpsv">1,059</div><div class="fpsl">Sq Ft</div></div>
+          <div><div class="fpsv">2</div><div class="fpsl">Bed</div></div>
+          <div><div class="fpsv">2.5</div><div class="fpsl">Bath</div></div>
+          <div><div class="fpsv">76</div><div class="fpsl">Units</div></div>
+        </div>
+        <div class="fpp">From $209,000</div>
+        <div class="fpf">Balcony · Study · Coffee Bar · Pantry · 2 Walk-in Closets · Powder Bath</div>
+      </div>
+    </div>
+    <div class="fpc">
+      <div class="fp-img"><img src="assets/brochure_img_9.jpeg" alt="Plan C1.1"></div>
+      <div class="fpb">
+        <div class="fpn">The Cardinal</div>
+        <div class="fpt">Plan C1.1 · Three Bedroom · 3.5 Bath</div>
+        <div class="fpsps">
+          <div><div class="fpsv">1,500</div><div class="fpsl">Sq Ft</div></div>
+          <div><div class="fpsv">3</div><div class="fpsl">Bed</div></div>
+          <div><div class="fpsv">3.5</div><div class="fpsl">Bath</div></div>
+          <div><div class="fpsv">38</div><div class="fpsl">Units</div></div>
+        </div>
+        <div class="fpp">From $239,000</div>
+        <div class="fpf">2 Balconies · Dining Room · Coffee Bar · Powder Bath · Washer/Dryer</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUNSET LIFESTYLE SPLIT -->
+<section class="split rev">
+  <div class="sp"><img src="assets/brochure_ext_img_12.jpg" alt="San Antonio sunset" style="height:100%;min-height:480px"></div>
+  <div class="sb dk rv">
+    <div class="lbl lt">A New Chapter</div>
+    <h2 class="h2 lt" style="margin-top:14px;margin-bottom:22px">The city you love.<br>A home that <em>loves you back.</em></h2>
+    <p class="p lt">San Antonio is growing. The Medical District is thriving. And for the first time — the nurses, doctors, researchers, and essential workers who fuel all of it have a home designed specifically around their lives.</p>
+    <p class="p lt" style="margin-top:13px">Not a compromise. A community built with genuine pride — because the people who show up every day deserve a home that means something.</p>
+    <div class="rule lt"></div>
+    <div class="stats">
+      <div><div class="sv lt">2027</div><div class="sl lt">First Homes Delivered</div></div>
+      <div><div class="sv lt">32</div><div class="sl lt">Pre-Reserved at Groundbreak</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SITE PLAN -->
+<section class="sec" style="background:var(--iv2)">
+  <div class="rv">
+    <div class="lbl">Master Site Plan</div>
+    <h2 class="h2" style="margin-top:14px">11 buildings.<br>One <em>community.</em></h2>
+  </div>
+  <div class="sp-grid rv d1">
+    <div style="overflow:hidden"><img src="assets/brochure_img_10.jpeg" alt="Site plan" style="width:100%;display:block;border:1px solid var(--iv3)"></div>
+    <div class="sp-legend">
+      <div class="sl-title">Community Layout</div>
+      <div class="sl-row"><span class="sl-n">1–3</span>South Buildings — Wurzbach Road frontage</div>
+      <div class="sl-row"><span class="sl-n">4–5</span>East Buildings — Seville Drive</div>
+      <div class="sl-row"><span class="sl-n">6–9</span>North Buildings — Blackberry Lane</div>
+      <div class="sl-row"><span class="sl-n">10–11</span>Central Buildings — Pool courtyard</div>
+      <div class="sl-row"><span style="color:var(--sg-dk);font-family:var(--serif);font-size:15px;min-width:26px">●</span>Pool Area — Community heart</div>
+      <div class="sl-row"><span style="color:var(--sg-dk);font-family:var(--serif);font-size:15px;min-width:26px">●</span>Dog Park — West courtyard</div>
+      <div class="sl-row"><span style="color:var(--mt);font-family:var(--serif);font-size:15px;min-width:26px">—</span>Covered Parking throughout</div>
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--iv3)">
+        <div style="font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--go);margin-bottom:10px">Boundaries</div>
+        <div style="font-size:12px;font-weight:300;color:var(--ch3);line-height:1.8">North: Blackberry Lane<br>South: Wurzbach Road<br>East: Seville Drive<br>West: Crystal Bow</div>
+      </div>
+    </div>
+  </div>
+  <div class="box rv d2" style="height:380px;margin-top:3px">
+    <img src="assets/brochure_img_11.jpeg" alt="Aerial night view">
+    <div class="box-cap">Aerial Night View — Dove Trails Community</div>
+  </div>
+</section>
+
+<!-- NEIGHBOURHOOD -->
+<section class="sec" style="background:var(--ch);padding-bottom:0">
+  <div class="rv">
+    <div class="lbl lt">The Neighbourhood</div>
+    <h2 class="h2 lt" style="margin-top:14px;margin-bottom:18px">The spots that make<br>a neighbourhood <em>real.</em></h2>
+    <p class="p lt" style="max-width:580px">Everything you need is close. The Medical Center is 2.5 miles away. Coffee, parks, restaurants, and the River Walk are all within reach — and they become part of your daily rhythm.</p>
+  </div>
+  <!-- Row 1: 4 equal symmetric -->
+  <div class="nbgrid r4" style="margin-top:44px">
+    <div class="nbc"><img src="assets/brochure_ext_img_13.jpg" alt="Medical Center"><div class="nbo"></div><div class="nbc-c"><div class="nbd">2.5 mi</div><div class="nbn">Medical Center</div><div class="nbx">35,000+ employees</div></div></div>
+    <div class="nbc"><img src="assets/brochure_ext_img_14.jpg" alt="Cafés"><div class="nbo"></div><div class="nbc-c"><div class="nbd">5 min</div><div class="nbn">Cafés &amp; Coffee</div><div class="nbx">Daily ritual, nearby</div></div></div>
+    <div class="nbc"><img src="assets/brochure_ext_img_15.jpg" alt="Dining"><div class="nbo"></div><div class="nbc-c"><div class="nbd">5 min</div><div class="nbn">Dining &amp; Food</div><div class="nbx">Local &amp; national brands</div></div></div>
+    <div class="nbc"><img src="assets/brochure_ext_img_16.jpg" alt="Shopping"><div class="nbo"></div><div class="nbc-c"><div class="nbd">8 min</div><div class="nbn">Shopping</div><div class="nbx">Wurzbach retail corridor</div></div></div>
+  </div>
+  <!-- Row 2: 3 equal symmetric -->
+  <div class="nbgrid r3" style="margin-top:3px;padding-bottom:0">
+    <div class="nbc"><img src="assets/brochure_ext_img_17.jpg" alt="Parks"><div class="nbo"></div><div class="nbc-c"><div class="nbd">8 min</div><div class="nbn">Parks &amp; Green Space</div><div class="nbx">Leon Creek Greenway nearby</div></div></div>
+    <div class="nbc"><img src="assets/brochure_ext_img_18.jpg" alt="Trails"><div class="nbo"></div><div class="nbc-c"><div class="nbd">10 min</div><div class="nbn">Nature Trails</div><div class="nbx">San Antonio River &amp; Greenways</div></div></div>
+    <div class="nbc"><img src="assets/brochure_ext_img_19.jpg" alt="Fitness"><div class="nbo"></div><div class="nbc-c"><div class="nbd">3 min</div><div class="nbn">Fitness &amp; Wellness</div><div class="nbx">Gyms, yoga, health facilities</div></div></div>
+  </div>
+</section>
+
+<!-- LOCATION + INVESTMENT -->
+<section class="sec" style="background:var(--ch2);display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start">
+  <div class="rv">
+    <div class="lbl lt">Your Address</div>
+    <h2 class="h2 lt" style="margin-top:14px;margin-bottom:16px">Eight minutes<br>from <em>everything.</em></h2>
+    <p class="p lt">5135 Wurzbach Road. The residents who will buy these homes already work, shop, and play within 5 miles of the site.</p>
+    <div class="loctab">
+      <div class="ltr"><span class="ltl">South Texas Medical Center</span><span class="ltv">2.5 mi</span></div>
+      <div class="ltr"><span class="ltl">Methodist Hospital</span><span class="ltv">3 min</span></div>
+      <div class="ltr"><span class="ltl">Christus Santa Rosa</span><span class="ltv">5 min</span></div>
+      <div class="ltr"><span class="ltl">UTSA Health Campus</span><span class="ltv">8 min</span></div>
+      <div class="ltr"><span class="ltl">The River Walk</span><span class="ltv">10 min</span></div>
+      <div class="ltr"><span class="ltl">Downtown San Antonio</span><span class="ltv">12 min</span></div>
+      <div class="ltr"><span class="ltl">San Antonio Airport</span><span class="ltv">18 min</span></div>
+    </div>
+  </div>
+  <div class="rv d1">
+    <div class="lbl lt" style="margin-bottom:24px">For Investors</div>
+    <div class="inv-panel">
+      <div class="lbl lt" style="margin-bottom:24px">Key Figures</div>
+      <div class="inv-stats">
+        <div class="ist"><div class="ist-val">152</div><div class="ist-lbl">Homes · Phase 1</div></div>
+        <div class="ist"><div class="ist-val">32</div><div class="ist-lbl">Pre-Reservations at Groundbreak</div></div>
+        <div class="ist"><div class="ist-val">$179K</div><div class="ist-lbl">Starting Price — Plan A2.1</div></div>
+        <div class="ist"><div class="ist-val">2027</div><div class="ist-lbl">First Delivery</div></div>
+        <div class="ist"><div class="ist-val">100%</div><div class="ist-lbl">Z-Co Completion Rate</div></div>
+      </div>
+      <p style="font-size:11px;font-weight:300;color:rgba(254,252,248,.26);line-height:1.7">Reserve with a fully refundable deposit. Same terms as institutional co-investors. Enquire at dovetrails.com</p>
+    </div>
+  </div>
+</section>
+
+<!-- DEVELOPER PROMISE -->
+<section class="split">
+  <div class="sp"><img src="assets/brochure_img_12.jpeg" alt="Community" style="height:100%;min-height:460px"></div>
+  <div class="sb dk rv">
+    <div class="lbl lt">Z-Co Development</div>
+    <h2 class="h2 lt" style="margin-top:14px;margin-bottom:22px">Thirty years.<br><em>Zero abandonments.</em></h2>
+    <p class="p lt">Founded in San Antonio in 1994. Hotels, healthcare facilities, restaurants, and residential communities — delivered through the 2008 financial crisis and COVID — without a single abandoned project.</p>
+    <div class="rule lt"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
+      <div style="background:rgba(255,255,255,.05);padding:20px 18px"><div class="sv lt">30+</div><div class="sl lt">Years in Texas</div></div>
+      <div style="background:rgba(255,255,255,.05);padding:20px 18px"><div class="sv lt">37</div><div class="sl lt">Projects Delivered</div></div>
+      <div style="background:rgba(255,255,255,.05);padding:20px 18px"><div class="sv lt">100%</div><div class="sl lt">Completion Rate</div></div>
+      <div style="background:rgba(255,255,255,.05);padding:20px 18px"><div class="sv lt">0</div><div class="sl lt">Abandonments</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="closing-bg"><img src="assets/brochure_img_13.jpeg" alt="Dove Trails"></div>
+  <div class="closing-g"></div>
+  <div class="clc rv">
+    <div class="cl-ey">Reserve Your Place</div>
+    <h2 class="cl-h">Your new home<br>in <em>Dove Trails.</em></h2>
+    <p class="cl-p">152 homes. Limited availability. Reserve with a fully refundable deposit — and be among the first to choose your home in San Antonio's most anticipated new community.</p>
+    <div class="cl-btns">
+      <a class="cb cb-g" href="https://www.dovetrails.com" target="_blank">Reserve Now</a>
+      <a class="cb cb-o" href="https://www.dovetrails.com" target="_blank">View Floor Plans</a>
+    </div>
+    <div class="cl-addr">5135 Wurzbach Road &nbsp;·&nbsp; San Antonio, TX &nbsp;·&nbsp; dovetrails.com &nbsp;·&nbsp; A Z-Co Development</div>
+  </div>
+</section>
+
+<div class="bfoot">
+  <div class="bfoot-logo"><img src="assets/brochure_ext_img_1.png" alt="Dove Trails" onerror="this.style.display='none'"></div>
+  <div class="bfoot-addr">5135 Wurzbach Road &nbsp;·&nbsp; San Antonio Medical District, Texas &nbsp;·&nbsp; dovetrails.com</div>
+  <div class="bfoot-r">A Z-Co Development &nbsp;·&nbsp; Est. 1994</div>
+</div>
+
+<script>
+const c1=document.getElementById('cur'),c2=document.getElementById('cur2');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;c1.style.left=mx+'px';c1.style.top=my+'px'});
+(function lp(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;c2.style.left=rx+'px';c2.style.top=ry+'px';requestAnimationFrame(lp)})();
+document.querySelectorAll('a,button,.box,.amc,.fpc,.nbc,.sp,.ltr').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.06,rootMargin:'0px 0px -12px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body></html>

@@ -3391,12 +3391,12 @@ document.addEventListener('keydown', e => {
 
 
 // Brochure download
-const _BD = 'brochure.html';
+const _BD = 'brochure.pdf';
 function dlBrochure(e) {
   if(e) e.preventDefault();
   const a = document.createElement('a');
   a.href = _BD;
-  a.download = 'DoveTrails-Brochure-2025.html';
+  a.download = 'DoveTrails-Brochure-2025.pdf';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);

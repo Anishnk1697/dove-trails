@@ -2824,7 +2824,7 @@ nav#mainNav.scrolled{background:rgba(28,26,23,.97);backdrop-filter:blur(20px);bo
         <span class="inv-sum-lbl">Floor Plans</span>
       </div>
       <div class="inv-sum-stat">
-        <span class="inv-sum-val">79%</span>
+        <span class="inv-sum-val">87%</span>
         <span class="inv-sum-lbl">Available</span>
       </div>
     </div>
@@ -3727,10 +3727,11 @@ const BUILDINGS = {
     {floor:1,unit:'112',model:'1-Bed-A1.1',sqft:800,status:'available'},
     {floor:2,unit:'121',model:'3-Bed-C1.1',sqft:1500,status:'available'},
     {floor:2,unit:'122',model:'2-Bed-B1.1',sqft:1400,status:'available'},
-    {floor:2,unit:'123',model:'2-Bed-B5.1',sqft:1077,status:'available'},
+    {floor:2,unit:'123',model:'2-Bed-B5.1',sqft:1077,status:'sold'},
     {floor:3,unit:'131',model:'3-Bed-C1.1',sqft:1500,status:'available'},
     {floor:3,unit:'132',model:'2-Bed-B1.1',sqft:1400,status:'available'},
     {floor:3,unit:'133',model:'2-Bed-B3.1',sqft:1209,status:'available'},
+    {floor:3,unit:'134',model:'2-Bed-B5.1',sqft:1077,status:'available'},
   ]},
   2: { name:'Building 2', units:[
     {floor:1,unit:'211',model:'1-Bed-A1.1',sqft:800,status:'available'},
@@ -3749,28 +3750,28 @@ const BUILDINGS = {
     {floor:3,unit:'332',model:'2-Bed-B1.1',sqft:1400,status:'available'},
   ]},
   4: { name:'Building 4', units:[
-    {floor:1,unit:'411',model:'1-Bed-A1.1',sqft:800,status:'available'},
-    {floor:1,unit:'412',model:'1-Bed-A1.1',sqft:800,status:'available'},
-    {floor:2,unit:'421',model:'3-Bed-C1.1',sqft:1500,status:'available'},
-    {floor:2,unit:'422',model:'2-Bed-B1.1',sqft:1400,status:'available'},
-    {floor:3,unit:'431',model:'3-Bed-C1.1',sqft:1500,status:'available'},
-    {floor:3,unit:'432',model:'2-Bed-B1.1',sqft:1400,status:'available'},
+    {floor:1,unit:'411',model:'1-Bed-A1.1',sqft:800,status:'sold'},
+    {floor:1,unit:'412',model:'1-Bed-A1.1',sqft:800,status:'sold'},
+    {floor:2,unit:'421',model:'3-Bed-C1.1',sqft:1500,status:'sold'},
+    {floor:2,unit:'422',model:'2-Bed-B1.1',sqft:1400,status:'sold'},
+    {floor:3,unit:'431',model:'3-Bed-C1.1',sqft:1500,status:'sold'},
+    {floor:3,unit:'432',model:'2-Bed-B1.1',sqft:1400,status:'sold'},
   ]},
   5: { name:'Building 5', units:[
-    {floor:1,unit:'511',model:'1-Bed-A1.1',sqft:800,status:'available'},
-    {floor:2,unit:'521',model:'2-Bed-B1.1',sqft:1400,status:'available'},
-    {floor:3,unit:'531',model:'3-Bed-C1.1',sqft:1500,status:'available'},
+    {floor:1,unit:'511',model:'1-Bed-A1.1',sqft:800,status:'sold'},
+    {floor:2,unit:'521',model:'2-Bed-B1.1',sqft:1400,status:'sold'},
+    {floor:3,unit:'531',model:'3-Bed-C1.1',sqft:1500,status:'sold'},
   ]},
   6: { name:'Building 6', units:[
-    {floor:1,unit:'611',model:'1-Bed-A1.1',sqft:800,status:'available'},
-    {floor:1,unit:'612',model:'1-Bed-A1.1',sqft:800,status:'available'},
-    {floor:2,unit:'621',model:'3-Bed-C1.1',sqft:1500,status:'available'},
-    {floor:2,unit:'622',model:'2-Bed-B1.1',sqft:1400,status:'available'},
-    {floor:3,unit:'631',model:'3-Bed-C1.1',sqft:1500,status:'available'},
-    {floor:3,unit:'632',model:'2-Bed-B1.1',sqft:1400,status:'available'},
+    {floor:1,unit:'611',model:'1-Bed-A1.1',sqft:800,status:'sold'},
+    {floor:1,unit:'612',model:'1-Bed-A1.1',sqft:800,status:'sold'},
+    {floor:2,unit:'621',model:'3-Bed-C1.1',sqft:1500,status:'sold'},
+    {floor:2,unit:'622',model:'2-Bed-B1.1',sqft:1400,status:'sold'},
+    {floor:3,unit:'631',model:'3-Bed-C1.1',sqft:1500,status:'sold'},
+    {floor:3,unit:'632',model:'2-Bed-B1.1',sqft:1400,status:'sold'},
   ]},
   7: { name:'Building 7', units:[
-    {floor:1,unit:'711',model:'1-Bed-A1.1',sqft:800,status:'available'},
+    {floor:1,unit:'711',model:'1-Bed-A1.1',sqft:800,status:'sold'},
     {floor:1,unit:'712',model:'1-Bed-A1.1',sqft:800,status:'available'},
     {floor:2,unit:'721',model:'3-Bed-C1.1',sqft:1500,status:'available'},
     {floor:2,unit:'722',model:'2-Bed-B1.1',sqft:1400,status:'available'},
@@ -3788,7 +3789,7 @@ const BUILDINGS = {
     {floor:3,unit:'833',model:'2-Bed-B1.2',sqft:1530,status:'available'},
   ]},
   9: { name:'Building 9', units:[
-    {floor:1,unit:'911',model:'2-Bed-B4.1',sqft:1257,status:'available'},
+    {floor:1,unit:'911',model:'2-Bed-B4.1',sqft:1257,status:'sold'},
     {floor:1,unit:'912',model:'1-Bed-A1.2',sqft:900,status:'available'},
     {floor:2,unit:'921',model:'3-Bed-C1.2',sqft:1609,status:'available'},
     {floor:2,unit:'922',model:'1-Bed-A3.1',sqft:850,status:'available'},
@@ -3808,7 +3809,7 @@ const BUILDINGS = {
     {floor:1,unit:'1008',model:'1-Bed-A2.1',sqft:725,status:'available'},
     {floor:1,unit:'1009',model:'1-Bed-A2.1',sqft:725,status:'available'},
     {floor:1,unit:'1010',model:'2-Bed-B2.1',sqft:1059,status:'available'},
-    {floor:1,unit:'1011',model:'2-Bed-B2.1',sqft:1059,status:'available'},
+    {floor:1,unit:'1011',model:'2-Bed-B2.1',sqft:1059,status:'sold'},
     {floor:1,unit:'1012',model:'1-Bed-A2.1',sqft:725,status:'available'},
     {floor:1,unit:'1013',model:'2-Bed-B2.1',sqft:1059,status:'available'},
     {floor:1,unit:'1014',model:'2-Bed-B2.1',sqft:1059,status:'available'},
@@ -3847,7 +3848,7 @@ const BUILDINGS = {
     {floor:3,unit:'10316',model:'1-Bed-A2.1',sqft:725,status:'available'},
   ]},
   11: { name:'Building 11', units:[
-    {floor:1,unit:'1101',model:'1-Bed-A2.1',sqft:725,status:'available'},
+    {floor:1,unit:'1101',model:'1-Bed-A2.1',sqft:725,status:'sold'},
     {floor:1,unit:'1102',model:'2-Bed-B2.1',sqft:1059,status:'available'},
     {floor:1,unit:'1103',model:'2-Bed-B2.1',sqft:1059,status:'available'},
     {floor:1,unit:'1104',model:'1-Bed-A2.1',sqft:725,status:'available'},

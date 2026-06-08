@@ -665,12 +665,14 @@ section { position: relative; }
 }
 .unit-card-img {
   width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
+  aspect-ratio: 3/4;
+  object-fit: contain;
+  background: var(--white);
+  padding: 16px;
   transition: transform 0.6s var(--ease-expo);
 }
 .unit-card:hover .unit-card-img { transform: scale(1.04); }
-.unit-card-img-wrap { overflow: hidden; }
+.unit-card-img-wrap { overflow: hidden; background: var(--white); }
 
 .unit-card-body { padding: 28px; }
 .unit-card-tag {
@@ -1792,9 +1794,9 @@ footer {
 /* ── FLOOR PLAN LIGHTBOX ──────────────────────────── */
 /* Card: photo on top, click reveals SVG plan */
 .unit-card { cursor: pointer; }
-.unit-card-img-wrap { position: relative; overflow: hidden; }
+.unit-card-img-wrap { position: relative; overflow: hidden; background: var(--white); }
 .unit-card-img { transition: transform 0.5s var(--ease-expo); display: block; }
-.unit-card:hover .unit-card-img { transform: scale(1.04); filter: brightness(0.9); }
+.unit-card:hover .unit-card-img { transform: scale(1.02); filter: brightness(0.97); }
 /* "View Floor Plan" hint on hover */
 .unit-card-img-wrap::after {
   content: 'View Floor Plan →';

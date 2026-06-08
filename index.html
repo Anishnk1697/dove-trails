@@ -2540,6 +2540,168 @@ nav#mainNav.scrolled{background:rgba(28,26,23,.97);backdrop-filter:blur(20px);bo
 .stmc-map-rule{color:rgba(191,154,90,.3)}
 .stmc-map-dist{margin-left:auto;color:rgba(191,154,90,.78);font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:300;font-style:italic;letter-spacing:.04em;text-transform:none}
 
+/* ═══════════════════════════════════════════════════
+   FLOOR PLAN GALLERY MODAL
+═══════════════════════════════════════════════════ */
+.fpg-overlay {
+  position: fixed; inset: 0; z-index: 3100;
+  background: rgba(28,26,23,0.75);
+  backdrop-filter: blur(14px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.38s var(--ease-silk);
+}
+.fpg-overlay.open { opacity: 1; pointer-events: all; }
+
+.fpg-modal {
+  background: var(--ivory);
+  border-radius: var(--radius);
+  width: 100%; max-width: 1020px;
+  max-height: 90vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  box-shadow: 0 48px 120px rgba(0,0,0,0.45);
+  transform: translateY(28px) scale(0.97);
+  transition: transform 0.42s var(--ease-expo);
+}
+.fpg-overlay.open .fpg-modal { transform: translateY(0) scale(1); }
+
+/* Header */
+.fpg-header {
+  background: var(--charcoal);
+  padding: 20px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.fpg-header-left { display: flex; flex-direction: column; gap: 3px; }
+.fpg-eyebrow {
+  font-size: 9px; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--gold);
+}
+.fpg-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 300; color: var(--white); line-height: 1;
+}
+.fpg-close {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.65); font-size: 18px; line-height: 1;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s; flex-shrink: 0;
+  font-family: 'Jost', sans-serif;
+}
+.fpg-close:hover { background: rgba(191,154,90,0.2); color: var(--gold-lt); border-color: rgba(191,154,90,0.4); }
+
+/* Body: thumbs left + main right */
+.fpg-body {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Left thumbnail rail */
+.fpg-thumbs {
+  overflow-y: auto;
+  border-right: 1px solid var(--stone-lt);
+  background: var(--white);
+  padding: 8px 0;
+}
+.fpg-thumb {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: background 0.2s, border-color 0.2s;
+}
+.fpg-thumb:hover { background: var(--ivory); }
+.fpg-thumb.active {
+  background: var(--ivory-deep);
+  border-left-color: var(--gold);
+}
+.fpg-thumb-img {
+  width: 54px; height: 54px;
+  object-fit: contain; background: var(--ivory);
+  border-radius: 2px; flex-shrink: 0;
+  border: 1px solid var(--stone-lt);
+  padding: 4px;
+}
+.fpg-thumb-info { display: flex; flex-direction: column; gap: 2px; }
+.fpg-thumb-code {
+  font-size: 13px; font-weight: 500; color: var(--charcoal);
+}
+.fpg-thumb-sqft {
+  font-size: 11px; color: var(--text-muted);
+}
+
+/* Right main view */
+.fpg-main {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  overflow: hidden;
+  background: var(--white);
+}
+.fpg-img-wrap {
+  overflow: hidden; display: flex;
+  align-items: center; justify-content: center;
+  background: var(--white);
+  padding: 24px;
+  min-height: 0;
+}
+.fpg-img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 2px;
+  transition: opacity 0.25s;
+}
+.fpg-img.switching { opacity: 0; }
+
+/* Specs bar at bottom */
+.fpg-specs-bar {
+  border-top: 1px solid var(--stone-lt);
+  background: var(--ivory);
+  padding: 16px 28px;
+  display: flex; align-items: center; gap: 0;
+  flex-shrink: 0;
+}
+.fpg-spec {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 0 24px;
+  border-right: 1px solid var(--stone-lt);
+}
+.fpg-spec:first-child { padding-left: 0; }
+.fpg-spec:last-child { border-right: none; }
+.fpg-spec-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 300; color: var(--gold); line-height: 1;
+}
+.fpg-spec-key {
+  font-size: 9px; font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+.fpg-model-label {
+  margin-left: auto;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 300; font-style: italic;
+  color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .fpg-body { grid-template-columns: 1fr; grid-template-rows: 140px 1fr; }
+  .fpg-thumbs { display: flex; overflow-x: auto; overflow-y: hidden; border-right: none; border-bottom: 1px solid var(--stone-lt); padding: 8px; flex-direction: row; }
+  .fpg-thumb { flex-direction: column; align-items: center; gap: 6px; padding: 8px 10px; min-width: 80px; border-left: none; border-bottom: 3px solid transparent; }
+  .fpg-thumb.active { border-left-color: transparent; border-bottom-color: var(--gold); }
+  .fpg-thumb-img { width: 48px; height: 48px; }
+  .fpg-specs-bar { flex-wrap: wrap; gap: 12px; }
+  .fpg-spec { border-right: none; padding: 0; }
+  .fpg-model-label { display: none; }
+}
+
 </style>
 </head>
 <body>
@@ -2850,7 +3012,7 @@ nav#mainNav.scrolled{background:rgba(28,26,23,.97);backdrop-filter:blur(20px);bo
 
   <div class="units-grid">
     <!-- Plan A: The Dove -->
-    <div class="unit-card reveal" data-type="1br" onclick="openFloorPlan('a')">
+    <div class="unit-card reveal" data-type="1br" onclick="openFpGallery('1bed')">
       <div class="unit-card-img-wrap">
         <img class="unit-card-img"
           src="assets/img_3.jpeg"
@@ -2870,7 +3032,7 @@ nav#mainNav.scrolled{background:rgba(28,26,23,.97);backdrop-filter:blur(20px);bo
     </div>
 
     <!-- Plan B: The Meadowlark -->
-    <div class="unit-card reveal reveal-delay-1" data-type="2br" onclick="openFloorPlan('b')">
+    <div class="unit-card reveal reveal-delay-1" data-type="2br" onclick="openFpGallery('2bed')">
       <div class="unit-card-img-wrap">
         <img class="unit-card-img"
           src="assets/img_4.jpeg"
@@ -2890,7 +3052,7 @@ nav#mainNav.scrolled{background:rgba(28,26,23,.97);backdrop-filter:blur(20px);bo
     </div>
 
     <!-- Plan C: The Cardinal -->
-    <div class="unit-card reveal reveal-delay-2" data-type="3br" onclick="openFloorPlan('c')">
+    <div class="unit-card reveal reveal-delay-2" data-type="3br" onclick="openFpGallery('3bed')">
       <div class="unit-card-img-wrap">
         <img class="unit-card-img"
           src="assets/img_5.jpeg"
@@ -3561,6 +3723,28 @@ nav#mainNav.scrolled{background:rgba(28,26,23,.97);backdrop-filter:blur(20px);bo
   <p>This website does not constitute an offer to sell securities. Review all offering documents on Wefunder before investing.</p>
 </div>
 
+<!-- FLOOR PLAN GALLERY MODAL -->
+<div class="fpg-overlay" id="fpgOverlay" onclick="closeFpGallery(event)">
+  <div class="fpg-modal" id="fpgModal">
+    <div class="fpg-header">
+      <div class="fpg-header-left">
+        <span class="fpg-eyebrow">Floor Plans</span>
+        <span class="fpg-title" id="fpgTitle">1 Bedroom Models</span>
+      </div>
+      <button class="fpg-close" onclick="closeFpGallery(null)">&#x2715;</button>
+    </div>
+    <div class="fpg-body">
+      <div class="fpg-thumbs" id="fpgThumbs"></div>
+      <div class="fpg-main">
+        <div class="fpg-img-wrap">
+          <img class="fpg-img" id="fpgImg" src="" alt="Floor plan">
+        </div>
+        <div class="fpg-specs-bar" id="fpgSpecsBar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- INVENTORY BUILDING MODAL -->
 <div class="inv-modal-overlay" id="invModalOverlay" onclick="closeInvModal(event)">
   <div class="inv-modal" id="invModal">
@@ -3722,6 +3906,92 @@ nav#mainNav.scrolled{background:rgba(28,26,23,.97);backdrop-filter:blur(20px);bo
 </div>
 
 <script>
+// ─── FLOOR PLAN GALLERY DATA ──────────────────────────────────────────
+const FP_GALLERY = {
+  '1bed': {
+    title: '1 Bedroom Floor Plans',
+    models: [
+      { code:'A1.1', sqft:800,  beds:1, baths:1,   img:'assets/img_3.jpeg' },
+      { code:'A1.2', sqft:900,  beds:1, baths:1,   img:'assets/img_10.jpeg' },
+      { code:'A2.1', sqft:725,  beds:1, baths:1,   img:'assets/brochure_v2_img_7.jpeg' },
+      { code:'A3.1', sqft:850,  beds:1, baths:1,   img:'assets/img_10.jpeg' },
+    ]
+  },
+  '2bed': {
+    title: '2 Bedroom Floor Plans',
+    models: [
+      { code:'B1.1', sqft:1400, beds:2, baths:2.5, img:'assets/img_4.jpeg' },
+      { code:'B1.2', sqft:1530, beds:2, baths:2.5, img:'assets/img_11.jpeg' },
+      { code:'B2.1', sqft:1059, beds:2, baths:2.5, img:'assets/brochure_v2_img_8.jpeg' },
+      { code:'B3.1', sqft:1209, beds:2, baths:2.5, img:'assets/img_4.jpeg' },
+      { code:'B4.1', sqft:1257, beds:2, baths:2.5, img:'assets/img_11.jpeg' },
+      { code:'B5.1', sqft:1077, beds:2, baths:2.5, img:'assets/img_4.jpeg' },
+    ]
+  },
+  '3bed': {
+    title: '3 Bedroom Floor Plans',
+    models: [
+      { code:'C1.1', sqft:1500, beds:3, baths:3.5, img:'assets/img_5.jpeg' },
+      { code:'C1.2', sqft:1609, beds:3, baths:3.5, img:'assets/brochure_v2_img_9.jpeg' },
+    ]
+  }
+};
+
+let fpgActive = null;
+
+function openFpGallery(bedType) {
+  const data = FP_GALLERY[bedType];
+  if (!data) return;
+  document.getElementById('fpgTitle').textContent = data.title;
+
+  // Build thumbnails
+  const thumbsEl = document.getElementById('fpgThumbs');
+  thumbsEl.innerHTML = data.models.map((m, i) => `
+    <div class="fpg-thumb${i===0?' active':''}" onclick="selectFpModel('${bedType}',${i})" id="fpg-thumb-${i}">
+      <img class="fpg-thumb-img" src="${m.img}" alt="${m.code}">
+      <div class="fpg-thumb-info">
+        <span class="fpg-thumb-code">Plan ${m.code}</span>
+        <span class="fpg-thumb-sqft">${m.sqft.toLocaleString()} sq ft</span>
+      </div>
+    </div>`).join('');
+
+  // Show first model
+  fpgActive = bedType;
+  renderFpModel(bedType, 0);
+
+  document.getElementById('fpgOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function selectFpModel(bedType, idx) {
+  document.querySelectorAll('.fpg-thumb').forEach((t,i) => t.classList.toggle('active', i===idx));
+  renderFpModel(bedType, idx);
+}
+
+function renderFpModel(bedType, idx) {
+  const m = FP_GALLERY[bedType].models[idx];
+  const img = document.getElementById('fpgImg');
+  img.classList.add('switching');
+  setTimeout(() => {
+    img.src = m.img;
+    img.alt = 'Plan ' + m.code;
+    img.classList.remove('switching');
+  }, 200);
+  document.getElementById('fpgSpecsBar').innerHTML = `
+    <div class="fpg-spec"><span class="fpg-spec-val">${m.beds}</span><span class="fpg-spec-key">Bed</span></div>
+    <div class="fpg-spec"><span class="fpg-spec-val">${m.baths}</span><span class="fpg-spec-key">Bath</span></div>
+    <div class="fpg-spec"><span class="fpg-spec-val">${m.sqft.toLocaleString()}</span><span class="fpg-spec-key">Sq Ft</span></div>
+    <div class="fpg-spec"><span class="fpg-spec-val">1</span><span class="fpg-spec-key">Garage</span></div>
+    <span class="fpg-model-label">Plan ${m.code}</span>`;
+}
+
+function closeFpGallery(e) {
+  if (e && e.target !== document.getElementById('fpgOverlay')) return;
+  document.getElementById('fpgOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  fpgActive = null;
+}
+
 // ─── INVENTORY BUILDING DATA ──────────────────────────────────────────
 const BUILDINGS = {
   1: { name:'Building 1', units:[

@@ -1898,6 +1898,297 @@ footer {
 .fp-cta-outline:hover { border-color: var(--charcoal); }
 
 /* ═══════════════════════════════════════════════════
+   RESERVATION FORM MODAL
+═══════════════════════════════════════════════════ */
+.res-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2500;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-silk);
+}
+.res-modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.res-modal-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(28,26,23,0.65);
+  backdrop-filter: blur(10px);
+}
+.res-modal-panel {
+  position: absolute;
+  top: 0; right: 0;
+  width: min(620px, 100%);
+  height: 100%;
+  background: var(--ivory);
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.6s var(--ease-expo);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.res-modal-overlay.open .res-modal-panel { transform: translateX(0); }
+
+.res-modal-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--ivory);
+  padding: 28px 44px 20px;
+  border-bottom: 1px solid var(--stone-lt);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+.res-modal-header-text { flex: 1; }
+.res-modal-eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.res-modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--charcoal);
+  line-height: 1.2;
+}
+.res-modal-title em { font-style: italic; color: var(--gold); }
+.res-modal-close {
+  background: none;
+  border: none;
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 0;
+  flex-shrink: 0;
+  transition: color 0.22s;
+}
+.res-modal-close:hover { color: var(--charcoal); }
+.res-modal-close-icon { font-size: 18px; line-height: 1; }
+
+.res-modal-body { padding: 32px 44px 48px; flex: 1; }
+.res-form-intro {
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* ── Form fields ── */
+.res-form { display: flex; flex-direction: column; gap: 0; }
+.res-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.res-form-row.full { grid-template-columns: 1fr; }
+.res-field { display: flex; flex-direction: column; gap: 6px; }
+.res-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+}
+.res-label .req { color: var(--gold); margin-left: 2px; }
+.res-input,
+.res-select,
+.res-textarea {
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  color: var(--charcoal);
+  background: var(--white);
+  border: 1px solid var(--stone-lt);
+  border-radius: 2px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.22s, box-shadow 0.22s;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+}
+.res-input::placeholder,
+.res-textarea::placeholder { color: rgba(28,26,23,0.3); }
+.res-input:focus,
+.res-select:focus,
+.res-textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(191,154,90,0.12);
+}
+.res-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23BF9A5A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
+.res-textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+
+.res-form-divider {
+  height: 1px;
+  background: var(--stone-lt);
+  margin: 24px 0;
+}
+.res-section-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+/* Checkbox row */
+.res-checkbox-group { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+.res-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  color: var(--charcoal);
+  cursor: pointer;
+  padding: 8px 14px;
+  border: 1px solid var(--stone-lt);
+  border-radius: 2px;
+  background: var(--white);
+  transition: border-color 0.2s, background 0.2s;
+  user-select: none;
+}
+.res-checkbox-label:hover { border-color: var(--gold); }
+.res-checkbox-label input[type="checkbox"] { display: none; }
+.res-checkbox-label.checked {
+  border-color: var(--gold);
+  background: rgba(191,154,90,0.08);
+  color: var(--charcoal);
+}
+.res-checkbox-label .check-icon {
+  width: 14px; height: 14px;
+  border: 1.5px solid var(--stone-lt);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.2s, background 0.2s;
+}
+.res-checkbox-label.checked .check-icon {
+  border-color: var(--gold);
+  background: var(--gold);
+}
+.res-checkbox-label.checked .check-icon::after {
+  content: '';
+  display: block;
+  width: 8px; height: 5px;
+  border-left: 1.5px solid #fff;
+  border-bottom: 1.5px solid #fff;
+  transform: rotate(-45deg) translateY(-1px);
+}
+
+/* Submit button */
+.res-submit-row { margin-top: 28px; }
+.res-submit-btn {
+  width: 100%;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  background: var(--gold);
+  border: none;
+  padding: 16px 24px;
+  cursor: pointer;
+  transition: background 0.22s, transform 0.18s;
+}
+.res-submit-btn:hover { background: var(--gold-lt); transform: translateY(-1px); }
+.res-submit-btn:active { transform: translateY(0); }
+.res-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.res-form-note {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-top: 14px;
+  text-align: center;
+}
+
+/* Success state */
+.res-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 44px;
+  flex: 1;
+  min-height: 400px;
+}
+.res-success.show { display: flex; }
+.res-success-icon {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(191,154,90,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.res-success-icon svg { width: 26px; height: 26px; stroke: var(--gold); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.res-success-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px;
+  font-weight: 400;
+  color: var(--charcoal);
+  margin-bottom: 12px;
+}
+.res-success-body {
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 360px;
+  margin-bottom: 28px;
+}
+.res-success-close {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: none;
+  border: 1px solid var(--gold);
+  padding: 11px 28px;
+  cursor: pointer;
+  transition: background 0.22s, color 0.22s;
+}
+.res-success-close:hover { background: var(--gold); color: var(--charcoal); }
+
+@media (max-width: 600px) {
+  .res-modal-header { padding: 22px 24px 16px; }
+  .res-modal-body { padding: 24px 24px 40px; }
+  .res-modal-title { font-size: 24px; }
+  .res-form-row { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════════════
    INVENTORY BUILDING MODAL
 ═══════════════════════════════════════════════════ */
 .inv-modal-overlay {
@@ -2718,7 +3009,7 @@ nav#mainNav.scrolled{background:rgba(28,26,23,.97);backdrop-filter:blur(20px);bo
     <li><a href="#lifestyle">Lifestyle</a></li>
     <li><a href="#neighbourhood">Neighbourhood</a></li>
     <li><a href="#developer">Developer</a></li>
-    <li><a href="#reserve">Reserve</a></li>
+    <li><a href="#" onclick="openReserveModal(); return false;">Reserve</a></li>
   </ul>
   <div class="nav-actions">
     <a href="#" onclick="dlBrochure(event)" class="nav-dl">
@@ -3943,6 +4234,163 @@ nav#mainNav.scrolled{background:rgba(28,26,23,.97);backdrop-filter:blur(20px);bo
   </div>
 </div>
 
+<!-- RESERVATION FORM MODAL -->
+<div class="res-modal-overlay" id="reserveModal">
+  <div class="res-modal-bg" onclick="closeReserveModal()"></div>
+  <div class="res-modal-panel">
+
+    <!-- Header -->
+    <div class="res-modal-header">
+      <div class="res-modal-header-text">
+        <p class="res-modal-eyebrow">Reserve Your Home</p>
+        <h2 class="res-modal-title">Secure your place in<br><em>Dove Trails</em>.</h2>
+      </div>
+      <button class="res-modal-close" onclick="closeReserveModal()">
+        <span class="res-modal-close-icon">×</span> Close
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="res-modal-body">
+      <p class="res-form-intro">
+        Complete the form below and our sales team will be in touch within 24 hours to walk you through available units, pricing, and next steps. No commitment required.
+      </p>
+
+      <!-- Form -->
+      <form class="res-form" id="reserveForm" onsubmit="submitReserveForm(event)" novalidate>
+
+        <!-- Name row -->
+        <div class="res-form-row">
+          <div class="res-field">
+            <label class="res-label">First Name <span class="req">*</span></label>
+            <input class="res-input" type="text" name="firstName" placeholder="Jane" required>
+          </div>
+          <div class="res-field">
+            <label class="res-label">Last Name <span class="req">*</span></label>
+            <input class="res-input" type="text" name="lastName" placeholder="Smith" required>
+          </div>
+        </div>
+
+        <!-- Contact row -->
+        <div class="res-form-row">
+          <div class="res-field">
+            <label class="res-label">Email Address <span class="req">*</span></label>
+            <input class="res-input" type="email" name="email" placeholder="jane@example.com" required>
+          </div>
+          <div class="res-field">
+            <label class="res-label">Phone Number</label>
+            <input class="res-input" type="tel" name="phone" placeholder="(210) 000-0000">
+          </div>
+        </div>
+
+        <div class="res-form-divider"></div>
+        <p class="res-section-label">Preferred Unit Type</p>
+
+        <!-- Unit type checkboxes -->
+        <div class="res-checkbox-group" id="unitTypeGroup">
+          <label class="res-checkbox-label" onclick="toggleCheckbox(this)">
+            <input type="checkbox" name="unitType" value="1 Bedroom">
+            <span class="check-icon"></span>
+            1 Bedroom
+          </label>
+          <label class="res-checkbox-label" onclick="toggleCheckbox(this)">
+            <input type="checkbox" name="unitType" value="2 Bedroom">
+            <span class="check-icon"></span>
+            2 Bedroom
+          </label>
+          <label class="res-checkbox-label" onclick="toggleCheckbox(this)">
+            <input type="checkbox" name="unitType" value="3 Bedroom">
+            <span class="check-icon"></span>
+            3 Bedroom
+          </label>
+          <label class="res-checkbox-label" onclick="toggleCheckbox(this)">
+            <input type="checkbox" name="unitType" value="Open to all">
+            <span class="check-icon"></span>
+            Open to All
+          </label>
+        </div>
+
+        <div class="res-form-divider"></div>
+        <p class="res-section-label">Purchase Details</p>
+
+        <!-- Budget & timeline -->
+        <div class="res-form-row">
+          <div class="res-field">
+            <label class="res-label">Budget Range</label>
+            <select class="res-select" name="budget">
+              <option value="" disabled selected>Select range</option>
+              <option>$160,000 – $180,000</option>
+              <option>$180,000 – $210,000</option>
+              <option>$210,000 – $240,000</option>
+              <option>$240,000+</option>
+              <option>Flexible / Not sure yet</option>
+            </select>
+          </div>
+          <div class="res-field">
+            <label class="res-label">Preferred Move-In</label>
+            <select class="res-select" name="timeline">
+              <option value="" disabled selected>Select timeframe</option>
+              <option>As soon as available</option>
+              <option>Within 6 months</option>
+              <option>6 – 12 months</option>
+              <option>12 – 24 months</option>
+              <option>Flexible</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Financing -->
+        <div class="res-form-row full" style="margin-bottom:16px">
+          <div class="res-field">
+            <label class="res-label">Financing Method</label>
+            <select class="res-select" name="financing">
+              <option value="" disabled selected>Select method</option>
+              <option>Mortgage / Conventional Loan</option>
+              <option>FHA Loan</option>
+              <option>VA Loan</option>
+              <option>Cash Purchase</option>
+              <option>Not yet determined</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="res-form-divider"></div>
+
+        <!-- Message -->
+        <div class="res-form-row full">
+          <div class="res-field">
+            <label class="res-label">Anything else you'd like us to know?</label>
+            <textarea class="res-textarea" name="message" placeholder="Specific floor, building preference, accessibility needs, etc."></textarea>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="res-submit-row">
+          <button class="res-submit-btn" type="submit" id="reserveSubmitBtn">
+            Submit Reservation Interest
+          </button>
+          <p class="res-form-note">
+            By submitting you agree to be contacted by the Dove Trails sales team. Your information is never shared with third parties.
+          </p>
+        </div>
+
+      </form>
+
+      <!-- Success State -->
+      <div class="res-success" id="reserveSuccess">
+        <div class="res-success-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <h3 class="res-success-title">You're on the list.</h3>
+        <p class="res-success-body">
+          Thank you for your interest in Dove Trails. A member of our sales team will reach out within 24 hours to discuss available units and next steps.
+        </p>
+        <button class="res-success-close" onclick="closeReserveModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- BUYER MODAL -->
 <div class="page-modal" id="buyerModal">
   <div class="modal-bg" onclick="closeModal('buyer')"></div>
@@ -4501,6 +4949,71 @@ document.querySelectorAll('.htab').forEach(btn => {
 });
 
 // ─── MODAL SYSTEM ─────────────────────────────────────
+// ─── RESERVATION FORM ─────────────────────────────
+function openReserveModal() {
+  document.getElementById('reserveModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeReserveModal() {
+  document.getElementById('reserveModal').classList.remove('open');
+  document.body.style.overflow = '';
+  // Reset form after close animation
+  setTimeout(() => {
+    document.getElementById('reserveForm').style.display = '';
+    document.getElementById('reserveSuccess').classList.remove('show');
+    document.getElementById('reserveForm').reset();
+    document.querySelectorAll('.res-checkbox-label').forEach(l => l.classList.remove('checked'));
+    document.getElementById('reserveSubmitBtn').disabled = false;
+    document.getElementById('reserveSubmitBtn').textContent = 'Submit Reservation Interest';
+  }, 600);
+}
+function toggleCheckbox(label) {
+  label.classList.toggle('checked');
+  const cb = label.querySelector('input[type="checkbox"]');
+  cb.checked = !cb.checked;
+}
+function submitReserveForm(e) {
+  e.preventDefault();
+  const form = document.getElementById('reserveForm');
+  const btn  = document.getElementById('reserveSubmitBtn');
+
+  // Simple required-field check
+  const first = form.firstName.value.trim();
+  const last  = form.lastName.value.trim();
+  const email = form.email.value.trim();
+  if (!first || !last || !email) {
+    // Highlight empties
+    [form.firstName, form.lastName, form.email].forEach(f => {
+      if (!f.value.trim()) {
+        f.style.borderColor = '#B03030';
+        f.addEventListener('input', () => f.style.borderColor = '', { once: true });
+      }
+    });
+    return;
+  }
+
+  // Gather selected unit types
+  const unitTypes = [...form.querySelectorAll('input[name="unitType"]:checked')].map(c => c.value).join(', ') || 'Not specified';
+
+  // Build mailto body (fallback — replace with fetch/API when backend ready)
+  const subject = encodeURIComponent(`Reservation Interest — ${first} ${last}`);
+  const body = encodeURIComponent(
+    `Name: ${first} ${last}\nEmail: ${email}\nPhone: ${form.phone.value || 'N/A'}\n\nUnit Type: ${unitTypes}\nBudget: ${form.budget.value || 'N/A'}\nMove-In: ${form.timeline.value || 'N/A'}\nFinancing: ${form.financing.value || 'N/A'}\n\nMessage:\n${form.message.value || 'None'}`
+  );
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  // Open mailto — in production swap this for a fetch() to your form endpoint
+  window.location.href = `mailto:sales@dovetrails.com?subject=${subject}&body=${body}`;
+
+  // Show success after short delay
+  setTimeout(() => {
+    form.style.display = 'none';
+    document.getElementById('reserveSuccess').classList.add('show');
+  }, 800);
+}
+
 function openModal(type) {
   document.getElementById(type === 'buyer' ? 'buyerModal' : 'investorModal').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -4511,7 +5024,7 @@ function closeModal(type) {
 }
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    closeModal('buyer'); closeModal('investor'); closeFloorPlan();
+    closeModal('buyer'); closeModal('investor'); closeFloorPlan(); closeReserveModal();
   }
 });
 

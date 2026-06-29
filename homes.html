@@ -2814,7 +2814,24 @@ nav#mainNav.scrolled{background:rgba(28,26,23,.97);backdrop-filter:blur(20px);bo
 .nav-dl:hover{color:var(--gold-lt)}
 .nav-cta{font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--charcoal);background:var(--gold);padding:9px 20px;text-decoration:none;transition:background .22s}
 .nav-cta:hover{background:var(--gold-lt)}
-@media(max-width:860px){nav#mainNav{padding:0 24px}.nav-links{display:none}}
+@media(max-width:860px){nav#mainNav{padding:0 24px}.nav-links{display:none}.nav-dl{display:none}}
+/* ── HAMBURGER BUTTON ── */
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;padding:8px;cursor:pointer;background:none;border:none;flex-shrink:0}
+.nav-hamburger span{display:block;width:22px;height:2px;background:rgba(255,255,255,.8);border-radius:1px;transition:transform .3s,opacity .3s}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:860px){.nav-hamburger{display:flex}}
+/* ── MOBILE MENU DRAWER ── */
+.mobile-menu{position:fixed;top:0;right:0;bottom:0;width:min(300px,85vw);background:rgba(28,26,23,.98);backdrop-filter:blur(24px);z-index:1100;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);padding:88px 32px 48px;display:flex;flex-direction:column;gap:0;border-left:1px solid rgba(191,154,90,.12)}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu-overlay{position:fixed;inset:0;z-index:1050;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .35s}
+.mobile-menu-overlay.open{opacity:1;pointer-events:all}
+.mobile-menu a,.mobile-menu button:not(.mobile-menu-reserve){font-family:'Jost',sans-serif;font-size:13px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;padding:18px 0;border-bottom:1px solid rgba(191,154,90,.1);display:block;background:none;border-left:none;border-right:none;border-top:none;cursor:pointer;text-align:left;transition:color .2s;width:100%}
+.mobile-menu a:hover,.mobile-menu button:not(.mobile-menu-reserve):hover{color:var(--gold-lt)}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu .mobile-menu-reserve{margin-top:32px;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--charcoal);background:var(--gold);padding:14px 24px;text-align:center;border:none;display:block;width:100%;cursor:pointer;transition:background .22s}
+.mobile-menu .mobile-menu-reserve:hover{background:var(--gold-lt)}
 
 /* ── SA CITY SECTION BG ── */
 #city{position:relative;overflow:hidden}
@@ -3042,8 +3059,23 @@ nav#mainNav.scrolled{background:rgba(28,26,23,.97);backdrop-filter:blur(20px);bo
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Brochure
     </a>
+    <button class="nav-hamburger" id="navHamburger" onclick="toggleMobileMenu()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobileMenu()">Home</a>
+  <a href="homes.html" onclick="closeMobileMenu()">Floor Plans &amp; Inventory</a>
+  <a href="index.html#lifestyle" onclick="closeMobileMenu()">Lifestyle</a>
+  <a href="index.html#neighbourhood" onclick="closeMobileMenu()">Neighbourhood</a>
+  <a href="index.html#developer" onclick="closeMobileMenu()">Developer</a>
+  <a href="#" onclick="dlBrochure(event); closeMobileMenu()">Download Brochure</a>
+  <button class="mobile-menu-reserve" onclick="closeMobileMenu(); openReserveModal()">Reserve Your Condo</button>
+</div>
 
 <!-- PAGE HEADER -->
 <div class="page-header">
@@ -3415,20 +3447,20 @@ nav#mainNav.scrolled{background:rgba(28,26,23,.97);backdrop-filter:blur(20px);bo
   <div class="footer-col">
     <h5>Residences</h5>
     <ul>
-      <li><a href="#" onclick="openFloorPlan('a'); return false;">The Dove — Plan A</a></li>
-      <li><a href="#" onclick="openFloorPlan('b'); return false;">The Meadowlark — Plan B</a></li>
-      <li><a href="#" onclick="openFloorPlan('c'); return false;">The Cardinal — Plan C</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#lifestyle">Amenities</a></li>
+      <li><a href="homes.html">The Dove — Plan A</a></li>
+      <li><a href="homes.html">The Meadowlark — Plan B</a></li>
+      <li><a href="homes.html">The Cardinal — Plan C</a></li>
+      <li><a href="index.html#gallery">Gallery</a></li>
+      <li><a href="index.html#lifestyle">Amenities</a></li>
     </ul>
   </div>
   <div class="footer-col">
     <h5>The Neighbourhood</h5>
     <ul>
-      <li><a href="#neighbourhood">Proximity Map</a></li>
-      <li><a href="#hangouts">Local Hangouts</a></li>
-      <li><a href="#city">About San Antonio</a></li>
-      <li><a href="#city">STMC & Employment</a></li>
+      <li><a href="index.html#neighbourhood">Proximity Map</a></li>
+      <li><a href="index.html#hangouts">Local Hangouts</a></li>
+      <li><a href="index.html#city">About San Antonio</a></li>
+      <li><a href="index.html#city">STMC & Employment</a></li>
     </ul>
   </div>
 </footer>
@@ -3513,7 +3545,7 @@ nav#mainNav.scrolled{background:rgba(28,26,23,.97);backdrop-filter:blur(20px);bo
       </div>
       <div class="fp-finishes" id="fpFinishes"></div>
       <div class="fp-cta-row">
-        <button class="fp-cta-primary" onclick="openModal('buyer'); closeFloorPlan()">Register Interest</button>
+        <button class="fp-cta-primary" onclick="closeFloorPlan(); openReserveModal()">Register Interest</button>
         <button class="fp-cta-outline" onclick="closeFloorPlan()">Back to Overview</button>
       </div>
     </div>
@@ -3703,8 +3735,8 @@ nav#mainNav.scrolled{background:rgba(28,26,23,.97);backdrop-filter:blur(20px);bo
     </div>
     <div class="modal-divider"></div>
     <div class="modal-cta-row">
-      <a href="#register" class="modal-cta modal-cta--primary" onclick="closeModal('buyer')">Register Interest</a>
-      <button class="modal-cta modal-cta--outline" onclick="closeModal('buyer'); setTimeout(()=>openFloorPlan('b'),100)">View Floor Plans</button>
+      <a href="#" class="modal-cta modal-cta--primary" onclick="closeModal('buyer'); openReserveModal(); return false;">Register Interest</a>
+      <button class="modal-cta modal-cta--outline" onclick="closeModal('buyer')">View Floor Plans</button>
     </div>
   </div>
 </div>
@@ -4171,6 +4203,24 @@ document.querySelectorAll('.htab').forEach(btn => {
 
 // ─── MODAL SYSTEM ─────────────────────────────────────
 // ─── RESERVATION FORM ─────────────────────────────
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const overlay = document.getElementById('mobileMenuOverlay');
+  const btn = document.getElementById('navHamburger');
+  const isOpen = menu.classList.contains('open');
+  if (isOpen) { closeMobileMenu(); } else {
+    menu.classList.add('open');
+    overlay.classList.add('open');
+    btn.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+function closeMobileMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('mobileMenuOverlay').classList.remove('open');
+  document.getElementById('navHamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
 function openReserveModal() {
   document.getElementById('reserveModal').classList.add('open');
   document.body.style.overflow = 'hidden';

@@ -3726,8 +3726,8 @@ nav#mainNav.scrolled{background:rgba(28,26,23,.97);backdrop-filter:blur(20px);bo
   <h2 class="section-title reveal reveal-delay-1">Reserve your place<br>in <em>Dove Trails</em>.</h2>
   <p class="register-sub reveal reveal-delay-2">Join the priority list for early access to floor plans, pricing, and site tours. No commitment required.</p>
   <div class="register-form reveal reveal-delay-2">
-    <input type="email" placeholder="Your email address" />
-    <button type="button">Register Interest</button>
+    <input type="email" id="registerEmailInput" placeholder="Your email address" />
+    <button type="button" onclick="openReserveModal()">Register Interest</button>
   </div>
   <p class="register-note reveal reveal-delay-3">No commitment. Priority access only. Your information is kept private.</p>
 </section>
@@ -4032,7 +4032,7 @@ nav#mainNav.scrolled{background:rgba(28,26,23,.97);backdrop-filter:blur(20px);bo
     </div>
     <div class="modal-divider"></div>
     <div class="modal-cta-row">
-      <a href="#register" class="modal-cta modal-cta--primary" onclick="closeModal('buyer')">Register Interest</a>
+      <a href="#" class="modal-cta modal-cta--primary" onclick="closeModal('buyer'); openReserveModal(); return false;">Register Interest</a>
       <button class="modal-cta modal-cta--outline" onclick="window.location.href='homes.html'">View Floor Plans</button>
     </div>
   </div>
